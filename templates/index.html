@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  @media (min-width: 1200px) {
+    legend {
+      font-size: 1.5rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: whitesmoke;
+  }
+
+  header {
+    height: 100vh;
+    padding: 36px 100px;
+    background-image: url({% static '1666021153553.jpg' %});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+  }
+
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 90%;
+    z-index: 99;
+  }
+
+  header nav img {
+    height: 56px;
+    width: 56px;
+    object-fit: contain;
+    filter: invert(70%) sepia(96%) saturate(558%) hue-rotate(359deg) brightness(103%) contrast(106%);
+  }
+
+  header nav ul {
+    display: flex;
+  }
+
+  header nav ul li {
+    list-style: none;
+    margin: 0px 20px;
+  }
+
+  header nav ul li a {
+    color: #98999a;
+    text-decoration: none;
+    transition: all ease 0.5s;
+  }
+
+  header nav ul li a:hover {
+    color: #2a00e7;
+  }
+
+  header nav ul li .active {
+    color: #ffffff;
+  }
+
+  .landing {
+    display: flex;
+    height: 90vh;
+    background-color: transparent;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .landing .intro {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing .intro h3 {
+    color: #fbfbfb;
+    font-weight: 400;
+    font-size: 32px;
+    margin-left: 10vw;
+  }
+
+  .landing .intro h3 span {
+    color: #000000;
+    font-weight: 600;
+    font-size: 3.5rem;
+  }
+
+  .intro button {
+    height: 48px;
+    width: 144px;
+    margin-top: 2.5vh;
+    margin-left: 10vw;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all ease 0.5s;
+  }
+
+  .intro button:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 50vh;
+  }
+
+  .lines .line {
+    background-color: #000000;
+    height: 15vh;
+    width: 2.5px;
+  }
+
+  .about {
+    height: 50vh;
+    width: 100vw;
+    padding: 100px;
+    background-color: white;
+    color: #000000;
+  }
+
+  .about h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Libre Baskerville", serif;
+  }
+
+  .about .description {
+    display: flex;
+    align-items: start;
+  }
+
+  .about .description .line {
+    height: 2.5px;
+    width: 400px;
+    background-color: #000000;
+    margin-right: 32px;
+  }
+
+  .about .description p {
+    color: #0f0909;
+    font-size: 20px;
+  }
+
+  .about .description p span {
+    color: #000000;
+  }
+
+  .skills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 100px;
+  }
+
+  .skills h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Libre Baskerville", serif;
+  }
+
+  .cards {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 2.5vh;
+  }
+
+  .skill-card {
+    height: 20vw;
+    width: 20vw;
+    background-color: #3d3e42;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5vh;
+    transition: all ease 0.5s;
+  }
+
+  .skill-card:hover {
+    background-color: #f6f1ea;
+  }
+
+  .skill-card img {
+    height: 7.5vw;
+    width: 7.5vw;
+    object-fit: contain;
+  }
+
+  .skill-card h2 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fbfbfb;
+  }
+
+  .skill-card h2:hover {
+    color: #000000;
+  }
+
+  .experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px;
+  }
+
+  .experience h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Libre Baskerville", serif;
+  }
+
+  .lighter-div {
+    background-color: whitesmoke;
+    width: 100vw;
+    /* height: 90vh; */
+    padding: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .lighter-div .exp {
+    height: 30vh;
+    width: 50vw;
+    position: relative;
+    margin-left: 20vh;
+  }
+
+  .experience .line {
+    height: 2.5px;
+    width: 200px;
+    background-color: #000000;
+  }
+
+  .contact-me {
+    width: 100vw;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #3d3e42;
+  }
+
+  .contact-me h1 {
+    font-size: 56px;
+    color: #fbfbfb;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+  }
+
+  .contact {
+    display: flex;
+    gap: 24px;
+  }
+
+  .contact-card {
+    background-color: #fec86a;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    margin-top: 7.5vh;
+  }
+
+  .portfolio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 100px;
+  }
+
+  .portfolio h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Libre Baskerville", serif;
+  }
+
+  .portfolio-cards {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 50px;
+    gap: 2.5vh;
+  }
+
+  .portfolio-card {
+    position: relative;
+    height: 30vw;
+    width: 30vw;
+    background-color: #3d3e42;
+    border-radius: 20px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5vh;
+    transition: all ease 0.5s;
+  }
+
+  .portfolio-card img {
+    position: relative;
+    height: 30vw;
+    width: 30vw;
+    object-fit: cover;
+  }
+
+  .portfolio-card .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5vh;
+    height: 30vw;
+    width: 30vw;
+    background-color: #34353ba2;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: all ease 0.5s;
+  }
+
+  .portfolio-card .overlay h3 {
+    color: #fbfbfb;
+    font-size: 24px;
+  }
+
+  .portfolio-card .overlay p {
+    color: #fbfbfb;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .portfolio-card .overlay button {
+    height: 36px;
+    width: 108px;
+    background-color: #fec86a;
+    border: 1px solid #fec86a;
+    border-radius: 8px;
+    color: #34353b;
+    font-size: 12px;
+    transition: all ease 0.5s;
+    cursor: pointer;
+  }
+
+  .portfolio-card .overlay:hover {
+    opacity: 1;
+  }
+
+  .portfolio button {
+    margin-top: 50px;
+    height: 48px;
+    width: 144px;
+    background-color: #fec86a;
+    border: 1px solid #fec86a;
+    border-radius: 8px;
+    color: #34353b;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease 0.5s;
+  }
+
+  .portfolio button:hover {
+    background-color: #cc9e4e;
+  }
+
+  .portfolio .line {
+    height: 2.5px;
+    width: 200px;
+    background-color: #000000;
+  }
+
+  /*  */
+  .footer {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background-color:#3d3e42;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    justify-content: left;
+    padding: 50px 100px;
+
+  }
+
+  .footer h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "Libre Baskerville", serif;
+  }
+</style>
+
+<body>
+  <!-- <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" id="nav">
+    <div class="container-fluid" id="Ashwin">
+      <a class="navbar-brand" href="#">Ashwin Unni</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" id="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">About me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#about" class="active">About</a></li>
+        <li><a href="#skills" class="active">Skills</a></li>
+        <li><a href="#contactmefooter" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="landing">
+      <div class="intro">
+        <h3>I'M <Span>Ashwin Unni</Span><br>Python Full Stack Developer</h3>
+        <a href="#contactmefooter"><button>Contact Me</button></a>
+      </div>
+      <div class="lines">
+        <div class="line"></div>
+      </div>
+    </div>
+  </header>
+  <section class="about" id="about">
+    <h1>About</h1>
+    <div class="description">
+      <div class="line"></div>
+      <p>I am a Python Full Stack Developer with over 1 years of experience in developing web applications.
+        I specialize in using Python, Django, HTML, CSS, JavaScript, MySql, Angular and RestAPI to create responsive and
+        visually appealing web pages.
+        I am proficient in using Git for version control.
+        I am passionate about solving complex problems and enjoy working collaboratively with cross-functional teams to
+        deliver high-quality products.</p>
+    </div>
+  </section>
+  <section class="skills" id="skills">
+    <h1>My Skills</h1>
+    <div class="cards">
+      <div class="skill-card">
+        <img src="{% static 'python-logo-only.svg' %}" alt="">
+        <h2>Python</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'django.svg' %}" alt="">
+        <h2>Django</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'angular-icon.svg' %}" alt="">
+        <h2>Angular</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'html.svg' %}" alt="">
+        <h2>HTML</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'CSS3_logo_and_wordmark.svg.png' %}" alt="">
+        <h2>CSS</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'bootstrap.svg' %}" alt="">
+        <h2>Bootstrap</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'javascript.svg' %}" alt="">
+        <h2>Javascript</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'rest-api-icon.svg' %}" alt="">
+        <h2>Rest API</h2>
+      </div>
+      <div class="skill-card">
+        <img src="{% static 'mysql-icon.svg' %}" alt="">
+        <h2>MYSQL</h2>
+      </div>
+    </div>
+  </section>
+  <section class="experience" id="experience">
+    <h1>Experience</h1>
+    <div class="line"></div>
+    <div class="lighter-div">
+      <div class="exp">
+        <h2>Python Django Full-stack Developer</h2>
+        <div class="exp-desc">
+          <h4>Luminar Technolab, Ernakulam ,kakkanad</h4>
+          <h6>Duration:[10/09/2022]-[26-03-2023]</h6>
+          <p style="text-align: justify;">As a python full-Stack Developer Intern,I had the opportunity to contribute to various aspects of web development,
+            gaining practical experience in both front-end and back-end technologies.During the phase of my Internship.
+            I collaborated with cross-functional teams,honed my coding skills,and world on real world projects.
+            Developed responsive user interfaces using HTML,CSS and Javascript.Implemented dynamic features and animations to enhance
+            user experience.Implemented user authentication and authorization features.
+            Resolved bugs and optimized code for better efficiency.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="portfolio" id="portfolio-loc">
+    <h1>My Works</h1>
+    <div class="line"></div>
+    <div class="portfolio-cards">
+      <div class="portfolio-card">
+        <img src="{% static 'flipkart logo icon 2.webp' %}" alt="">
+        <div class="overlay">
+          <h3>Flipkart E-Commerce</h3>
+          <p>An E-Commerce Website,That Peoples Can Buy And Sell There Products. As Same UI Of Flipkart Official
+            Website.</p>
+          <button>See More -></button>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="{% static 'carparking3.jpg' %}" alt="">
+        <div class="overlay">
+          <h3>RentItNow</h3>
+          <p>A platform which gives different types of cars for daily rent basics.</p>
+          <button>See More -></button>
+        </div>
+      </div>
+      <!-- <div class="portfolio-card">
+          <img src="asset/images/vimal-s-bVplevb7Bhk-unsplash.jpg" alt="">
+          <div class="overlay">
+              <h3>Google Scrapper</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laudantium!</p>
+              <button>See More -></button>
+          </div>
+      </div>
+      <div class="portfolio-card">
+          <img src="asset/images/warren-umoh-K7M7dQO-HrA-unsplash.jpg" alt="">
+          <div class="overlay">
+              <h3>Twitter Scrapper</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laudantium!</p>
+              <button>See More -></button>
+          </div>
+      </div>
+      <div class="portfolio-card">
+          <img src="asset/images/warren-umoh-pnMjGMOs2Xw-unsplash.jpg" alt="">
+          <div class="overlay">
+              <h3>LinkedIn Scrapper</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laudantium!</p>
+              <button>See More -></button>
+          </div>
+      </div>
+      <div class="portfolio-card">
+          <img src="asset/images/warren-umoh-VL12rhr4mi0-unsplash.jpg" alt="">
+          <div class="overlay">
+              <h3>YouTube Scrapper</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laudantium!</p>
+              <button>See More -></button>
+          </div>
+      </div> -->
+    </div>
+    <!-- <Button>View More</Button> -->
+  </section>
+
+
+  <!-- <section class="contact-me" id="contact-loc">
+    <h1>Contact Me</h1>
+    <div class="contact">
+      <div class="contact-card">
+        <i class="ri-message-3-line"></i>
+        <p>ashwinunni23@gmail.com</p>
+      </div>
+      <div class="contact-card">
+        <i class="ri-phone-line"></i>
+        <p>8075555358</p>
+      </div>
+      <div class="contact-card">
+        <i class="ri-map-pin-3-line"></i>
+        <p>Ernakulam, kerala, India</p>
+      </div>
+    </div>
+  </section> -->
+
+
+  <!--  -->
+  <footer class="footer text-center" id="contactmefooter">
+    <h1>Contact Me</h1><br><br>
+    <div class="container">
+      <div class="row">
+        <!-- Footer Location-->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <h4 class="text mb-4">Email</h4>
+          <p class="lead mb-0">
+            ashwinunni23@gmail.com
+          </p>
+        </div>
+        <!-- Footer Social Icons-->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-whatsapp"></i></a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-instagram"></i></a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+        </div>
+        <!-- Footer About Text-->
+        <div class="col-lg-4">
+          <h4 class="text mb-4">Contact Number</h4>
+          <p class="lead mb-0">
+            8075555358
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
